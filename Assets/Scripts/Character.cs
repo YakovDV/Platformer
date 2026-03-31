@@ -30,8 +30,6 @@ public class Character : MonoBehaviour
     private KeyCode _jumpKey = KeyCode.UpArrow;
 
     public event Action<bool> ImDead;
-    public event Action<bool> ImJumping;
-    public event Action<bool> ImWalking;
 
     private void Awake()
     {

@@ -63,11 +63,6 @@ public class Character : MonoBehaviour
         Vector2 horizontalVelocity = _inputDirection * _speed;
         _rigidbody.velocity = new(horizontalVelocity.x, _rigidbody.velocity.y);
 
-        if (_isGrounded == true && _rigidbody.velocity.x > 0)
-        {
-            ImWalking?.Invoke(true);
-        }
-
         if (_isJumping == true && _isGrounded == true)
         {
             Jump();
@@ -102,8 +97,6 @@ public class Character : MonoBehaviour
 
         _isJumping = false;
         _isGrounded = false;
-
-        ImJumping?.Invoke(true);
     }
 
     private void CheckGround()

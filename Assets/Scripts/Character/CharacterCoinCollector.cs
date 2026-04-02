@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 
-public class PlayerCoinCollector : MonoBehaviour
+public class CharacterCoinCollector : MonoBehaviour
 {
     [SerializeField] private PlayerWallet _wallet;
     private Collider2D _collider;

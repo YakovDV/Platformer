@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Respawn : MonoBehaviour
+public class CharacterSpawner : MonoBehaviour
 {
     [SerializeField] private Character _character;
     [SerializeField] private Character _prefab;
@@ -47,7 +47,7 @@ public class Respawn : MonoBehaviour
 
         _character = Instantiate(_prefab);
 
-        if (_character.TryGetComponent<PlayerCoinCollector>(out PlayerCoinCollector collector))
+        if (_character.TryGetComponent<CharacterCoinCollector>(out CharacterCoinCollector collector))
         {
             collector.SetWallet(_wallet);
         }

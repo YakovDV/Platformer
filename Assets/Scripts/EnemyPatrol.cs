@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyPatrol : MonoBehaviour
 {
     [SerializeField] private Transform[] _points;
-    [SerializeField] private float _waitOnPointTime = 1f;
+    [SerializeField] private WaitForSeconds _waitOnPointTime = new(1f);
 
     private Coroutine _waitOnPointCoroutine;
     private int _currentPointIndex = 0;
@@ -42,7 +42,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         IsWaiting = true;
 
-        yield return new WaitForSecondsRealtime(_waitOnPointTime);
+        yield return _waitOnPointTime;
 
         SetNextPoint();
 

@@ -10,7 +10,15 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        ReadInput();
+        float xDirection = Input.GetAxis(Horizontal);
+
+        if (Input.GetKeyDown(_jumpKey))
+        {
+            IsJumpRequested = true;
+        }
+
+        InputDirection = new Vector2(xDirection, 0);
+        InputDirection = Vector2.ClampMagnitude(InputDirection, 1f);
     }
 
     public void ResetJumpRequest()
@@ -21,18 +29,5 @@ public class PlayerInput : MonoBehaviour
         }
 
         IsJumpRequested = false;
-    }
-
-    private void ReadInput()
-    {
-        float xDirection = Input.GetAxis(Horizontal);
-
-        if (Input.GetKeyDown(_jumpKey))
-        {
-            IsJumpRequested = true;
-        }
-
-        InputDirection = new Vector2(xDirection, 0);
-        InputDirection = Vector2.ClampMagnitude(InputDirection, 1f);
     }
 }

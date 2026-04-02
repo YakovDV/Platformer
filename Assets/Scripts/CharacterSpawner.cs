@@ -7,7 +7,7 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private Character _character;
     [SerializeField] private Character _prefab;
     [SerializeField] private PlayerWallet _wallet;
-    [SerializeField] private float _delay = 2f;
+    [SerializeField] private WaitForSeconds _delay = new(2f);
 
     private Coroutine _spawnDelay;
 
@@ -41,7 +41,7 @@ public class CharacterSpawner : MonoBehaviour
             UnsubscribeFromCharacter();
         }
 
-        yield return new WaitForSecondsRealtime(_delay);
+        yield return _delay;
 
         Destroy(_character.gameObject);
 
@@ -63,7 +63,7 @@ public class CharacterSpawner : MonoBehaviour
     {
         if (_character != null)
         {
-            _character.ImDead += SpawnCharacter;
+            _character.Dead += SpawnCharacter;
         }
     }
 
@@ -71,7 +71,7 @@ public class CharacterSpawner : MonoBehaviour
     {
         if (_character != null)
         {
-            _character.ImDead -= SpawnCharacter;
+            _character.Dead -= SpawnCharacter;
         }
     }
 }

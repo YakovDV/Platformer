@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
 
     private Coroutine _groundDetectionCoroutine;
 
-    public event Action<bool> ImDead;
+    public event Action<bool> Dead;
 
     public bool IsGrounded => _isGrounded;
     public bool IsDead => _isDead;
@@ -57,7 +57,7 @@ public class Character : MonoBehaviour
 
     private IEnumerator UpdateGroundedState()
     {
-        WaitForSecondsRealtime detectionFrequency = new(_groundDetectionFrequency);
+        WaitForSeconds detectionFrequency = new(_groundDetectionFrequency);
 
         while (_isDead == false)
         {
@@ -83,6 +83,6 @@ public class Character : MonoBehaviour
 
     private void HandleDeath()
     {
-        ImDead?.Invoke(true);
+        Dead?.Invoke(true);
     }
 }

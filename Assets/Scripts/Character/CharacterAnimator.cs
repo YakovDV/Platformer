@@ -21,12 +21,12 @@ public class CharacterAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _character.ImDead += PlayDeathAnimation;
+        _character.Dead += PlayDeathAnimation;
     }
 
     private void OnDisable()
     {
-        _character.ImDead -= PlayDeathAnimation;
+        _character.Dead -= PlayDeathAnimation;
     }
 
     private void Update()

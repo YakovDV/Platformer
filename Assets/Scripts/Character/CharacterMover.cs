@@ -6,12 +6,15 @@ public class CharacterMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _jumpForce = 8f;
+    [SerializeField] private GroundSensor _groundSensor;
 
     private Rigidbody2D _rigidbody;
     private PlayerInput _playerInput;
     private Character _character;
-    private HorizontalTurn2D _horizontalTurn;
+    private Rotator _horizontalTurn;
     private Vector2 _horizontalVelocity;
+
+    private bool _isJumpRequested;
 
     public float NormalizedHorizontalSpeed { get; private set; }
 
@@ -20,7 +23,17 @@ public class CharacterMover : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         _character = GetComponent<Character>();
-        _horizontalTurn = GetComponent<HorizontalTurn2D>();
+        _horizontalTurn = GetComponent<Rotator>();
+    }
+
+    private void OnEnable()
+    {
+        _playerInput.JumpPressed += OnJumpPressed;
+    }
+
+    private void OnDisable()
+    {
+        _playerInput.JumpPressed -= OnJumpPressed;
     }
 
     private void FixedUpdate()
@@ -33,14 +46,6 @@ public class CharacterMover : MonoBehaviour
 
         MoveHorizontal();
         _horizontalTurn.TurnToMovement(_horizontalVelocity.x);
-
-        bool isJumpRequested = _playerInput.IsJumpRequested;
-        _playerInput.ResetJumpRequest();
-
-        if (isJumpRequested == true && _character.IsGrounded == true)
-        {
-            Jump();
-        }
     }
 
     private void MoveHorizontal()
@@ -51,12 +56,23 @@ public class CharacterMover : MonoBehaviour
         NormalizedHorizontalSpeed = _horizontalVelocity.magnitude / _speed;
     }
 
-    private void Jump()
+    private void OnJumpPressed()
     {
-        Vector2 jumpDirection = new(0, _jumpForce);
+        if (_groundSensor.IsGrounded == false || _isJumpRequested == true || _character.IsDead == true)
+        {
+            return;
+        }
 
+        _isJumpRequested = true;
+
+        Vector2 jumpDirection = new(0, _jumpForce);
         _rigidbody.AddForce(jumpDirection, ForceMode2D.Impulse);
 
-        _playerInput.ResetJumpRequest();
+        if (_isJumpRequested == false)
+        {
+            return;
+        }
+
+        _isJumpRequested = false;
     }
 }

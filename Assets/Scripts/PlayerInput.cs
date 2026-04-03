@@ -1,33 +1,24 @@
+using System;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
     private const string Horizontal = nameof(Horizontal);
-    private KeyCode _jumpKey = KeyCode.UpArrow;
+    private const string Jump = nameof(Jump);
 
     public Vector2 InputDirection { get; private set; }
-    public bool IsJumpRequested { get; private set; }
+    public event Action JumpPressed;
 
     private void Update()
     {
         float xDirection = Input.GetAxis(Horizontal);
 
-        if (Input.GetKeyDown(_jumpKey))
+        if (Input.GetButtonDown(Jump))
         {
-            IsJumpRequested = true;
+            JumpPressed?.Invoke();
         }
 
         InputDirection = new Vector2(xDirection, 0);
         InputDirection = Vector2.ClampMagnitude(InputDirection, 1f);
-    }
-
-    public void ResetJumpRequest()
-    {
-        if (IsJumpRequested == false)
-        {
-            return;
-        }
-
-        IsJumpRequested = false;
     }
 }

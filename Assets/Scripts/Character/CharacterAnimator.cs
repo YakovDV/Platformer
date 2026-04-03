@@ -8,6 +8,8 @@ public class CharacterAnimator : MonoBehaviour
     private static readonly int IsDying = Animator.StringToHash("IsDying");
     private static readonly int Speed = Animator.StringToHash("Speed");
 
+    [SerializeField] private GroundSensor _groundSensor;
+
     private Animator _animator;
     private Character _character;
     private CharacterMover _characterMover;
@@ -31,7 +33,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetBool(IsJumping, !_character.IsGrounded);
+        _animator.SetBool(IsJumping, !_groundSensor.IsGrounded);
 
         _animator.SetFloat(Speed, _characterMover.NormalizedHorizontalSpeed, 0.1f, Time.deltaTime);
     }

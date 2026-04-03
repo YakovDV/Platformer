@@ -5,21 +5,10 @@ using UnityEngine;
 public class CameraMover : MonoBehaviour
 {
     [SerializeField] private Character _charecter;
-    [SerializeField] private CharacterSpawner _respawn;
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
 
     private Vector3 _offset = new(0f, 0f, -10f);
-
-    private void OnEnable()
-    {
-        _respawn.CharacterSpawned += SetCharecter;
-    }
-
-    private void OnDisable()
-    {
-        _respawn.CharacterSpawned -= SetCharecter;
-    }
 
     private void Update()
     {
@@ -34,7 +23,7 @@ public class CameraMover : MonoBehaviour
         transform.position = position + _offset;
     }
 
-    private void SetCharecter(Character character)
+    public void SetCharacter(Character character)
     {
         _charecter = character;
     }

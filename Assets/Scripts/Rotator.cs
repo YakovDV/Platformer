@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HorizontalTurn2D : MonoBehaviour
+public class Rotator : MonoBehaviour
 {
     public void TurnToMovement(float value)
     {

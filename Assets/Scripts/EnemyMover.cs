@@ -8,8 +8,9 @@ public class EnemyMover : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private EnemyPatrol _enemyPatrol;
-    private HorizontalTurn2D _horizontalTurn;
+    private Rotator _horizontalTurn;
     private Vector2 _direction;
+    private Transform _currentTarget;
 
     public float NormalizedHorizontalSpeed
     {
@@ -23,7 +24,7 @@ public class EnemyMover : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _enemyPatrol = GetComponent<EnemyPatrol>();
-        _horizontalTurn = GetComponent<HorizontalTurn2D>();
+        _horizontalTurn = GetComponent<Rotator>();
     }
 
     private void FixedUpdate()
@@ -36,15 +37,18 @@ public class EnemyMover : MonoBehaviour
             return;
         }
 
-        SetDirection(target);
-        _horizontalTurn.TurnToMovement(_direction.x);
-
-        MoveToPoint();
+        if (_currentTarget != target)
+        {
+            SetDirection(target);
+            MoveToPoint();
+        }
     }
 
-    private void SetDirection(Transform point)
+    private void SetDirection(Transform target)
     {
-        _direction = (point.position - transform.position).normalized;
+        _currentTarget = target;
+        _direction = (_currentTarget.position - transform.position).normalized;
+        _horizontalTurn.TurnToMovement(_direction.x);
     }
 
     private void MoveToPoint()

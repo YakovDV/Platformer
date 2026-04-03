@@ -12,14 +12,6 @@ public class EnemyMover : MonoBehaviour
     private Vector2 _direction;
     private Transform _currentTarget;
 
-    public float NormalizedHorizontalSpeed
-    {
-        get
-        {
-            return new Vector2(_rigidbody.velocity.x, 0f).magnitude / _speed;
-        }
-    }
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -42,6 +34,11 @@ public class EnemyMover : MonoBehaviour
             SetDirection(target);
             MoveToPoint();
         }
+    }
+
+    public float NormalizedHorizontalSpeed()
+    {
+        return new Vector2(_rigidbody.velocity.x, 0f).magnitude / _speed;
     }
 
     private void SetDirection(Transform target)

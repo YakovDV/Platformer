@@ -17,6 +17,6 @@ public class EnemyAnimator : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat(Speed, _enemyMover.NormalizedHorizontalSpeed, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, _enemyMover.NormalizedHorizontalSpeed(), 0.1f, Time.deltaTime);
     }
 }

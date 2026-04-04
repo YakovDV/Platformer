@@ -34,7 +34,9 @@ public class EnemyPatrol : MonoBehaviour
         if (IsTargetReached())
         {
             if (_waitOnPointCoroutine == null)
+            {
                 _waitOnPointCoroutine = StartCoroutine(WaitOnPoint());
+            }
         }
     }
 

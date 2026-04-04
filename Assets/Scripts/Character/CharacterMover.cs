@@ -1,20 +1,18 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput), typeof(Character))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput), typeof(Health))]
 
 public class CharacterMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
-    [SerializeField] private float _jumpForce = 8f;
     [SerializeField] private GroundSensor _groundSensor;
 
     private Rigidbody2D _rigidbody;
     private PlayerInput _playerInput;
-    private Character _character;
     private Rotator _horizontalTurn;
+    private Jumper _jumper;
+    private Health _health;
     private Vector2 _horizontalVelocity;
-
-    private bool _isJumpRequested;
 
     public float NormalizedHorizontalSpeed { get; private set; }
 
@@ -22,8 +20,9 @@ public class CharacterMover : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
-        _character = GetComponent<Character>();
         _horizontalTurn = GetComponent<Rotator>();
+        _jumper = GetComponent<Jumper>();
+        _health = GetComponent<Health>();
     }
 
     private void OnEnable()
@@ -38,7 +37,7 @@ public class CharacterMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_character.IsDead == true)
+        if (_health.IsDead == true)
         {
             _rigidbody.velocity = new Vector2(0f, _rigidbody.velocity.y);
             return;
@@ -58,21 +57,11 @@ public class CharacterMover : MonoBehaviour
 
     private void OnJumpPressed()
     {
-        if (_groundSensor.IsGrounded == false || _isJumpRequested == true || _character.IsDead == true)
+        if (_groundSensor.IsGrounded == false || _health.IsDead == true)
         {
             return;
         }
 
-        _isJumpRequested = true;
-
-        Vector2 jumpDirection = new(0, _jumpForce);
-        _rigidbody.AddForce(jumpDirection, ForceMode2D.Impulse);
-
-        if (_isJumpRequested == false)
-        {
-            return;
-        }
-
-        _isJumpRequested = false;
+        _jumper.Jump(_rigidbody);
     }
 }

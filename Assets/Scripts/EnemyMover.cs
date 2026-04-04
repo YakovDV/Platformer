@@ -1,27 +1,47 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(EnemyPatrol), typeof(Rotator))]
 
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private float _chaseSpeed;
+    [SerializeField] private EnemyCharacterSensor _characterSensor;
 
     private Rigidbody2D _rigidbody;
+    private Health _health;
     private EnemyPatrol _enemyPatrol;
     private Rotator _horizontalTurn;
     private Vector2 _direction;
     private Transform _currentTarget;
+
+    private float _cahseDistance = 2f;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _enemyPatrol = GetComponent<EnemyPatrol>();
         _horizontalTurn = GetComponent<Rotator>();
+        _health = GetComponent<Health>();
     }
 
     private void FixedUpdate()
     {
-        Transform target = _enemyPatrol.CurrentPoint;
+        if (_health != null && _health.IsDead == true)
+        {
+            return;
+        }
+
+        Transform target = _characterSensor.TargetPosition;
+
+        if (target != null)
+        {
+            Chase(target);
+            return;
+        }
+
+        target = _enemyPatrol.CurrentPoint;
 
         if (_enemyPatrol.IsWaiting == true || target == null)
         {
@@ -32,7 +52,7 @@ public class EnemyMover : MonoBehaviour
         if (_currentTarget != target)
         {
             SetDirection(target);
-            MoveToPoint();
+            MoveToPoint(_speed);
         }
     }
 
@@ -48,12 +68,28 @@ public class EnemyMover : MonoBehaviour
         _horizontalTurn.TurnToMovement(_direction.x);
     }
 
-    private void MoveToPoint()
+    private void MoveToPoint(float speed)
     {
-        Vector2 velocity = _direction * _speed;
+        Vector2 velocity = _direction * speed;
         velocity.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = velocity;
+    }
+
+    private void Chase(Transform target)
+    {
+        Vector2 toTarget = (Vector2)target.position - (Vector2)transform.position;
+        float distanceSqr = _cahseDistance * _cahseDistance;
+
+        if (toTarget.sqrMagnitude <= distanceSqr)
+        {
+            StopMoving();
+        }
+        else
+        {
+            SetDirection(target);
+            MoveToPoint(_chaseSpeed);
+        }
     }
 
     private void StopMoving()

@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour
 {
-    [SerializeField] private Character _character;
     [SerializeField] private Character _prefab;
     [SerializeField] private PlayerWallet _wallet;
+    [SerializeField] private HealthViewer _healthViewer;
     [SerializeField] private WaitForSeconds _delay = new(2f);
 
+    private Character _character;
+    private Health _health;
     private Coroutine _spawnDelay;
 
     public event Action<Character> CharacterSpawned;
 
-    private void OnEnable()
+    private void Start()
     {
-        SubscribeToCharacter();
+        SpawnCharacter();
     }
 
     private void OnDisable()
@@ -23,7 +25,7 @@ public class CharacterSpawner : MonoBehaviour
         UnsubscribeFromCharacter();
     }
 
-    private void SpawnCharacter(bool isSpawnNeeded)
+    private void SpawnCharacterDelayed(bool isSpawnNeeded)
     {
         if (isSpawnNeeded == false)
             return;
@@ -32,6 +34,23 @@ public class CharacterSpawner : MonoBehaviour
             StopCoroutine(_spawnDelay);
 
         _spawnDelay = StartCoroutine(RespawnTimer());
+    }
+
+    private void SpawnCharacter()
+    {
+        _character = Instantiate(_prefab);
+
+        if (_character.TryGetComponent<CharacterCoinCollector>(out CharacterCoinCollector collector))
+        {
+            collector.SetWallet(_wallet);
+        }
+
+        _health = _character.GetComponent<Health>();
+        _healthViewer.SetHealth(_health);
+
+        SubscribeToCharacter();
+
+        CharacterSpawned?.Invoke(_character);
     }
 
     private IEnumerator RespawnTimer()
@@ -45,16 +64,7 @@ public class CharacterSpawner : MonoBehaviour
 
         Destroy(_character.gameObject);
 
-        _character = Instantiate(_prefab);
-
-        if (_character.TryGetComponent<CharacterCoinCollector>(out CharacterCoinCollector collector))
-        {
-            collector.SetWallet(_wallet);
-        }
-
-        SubscribeToCharacter();
-
-        CharacterSpawned?.Invoke(_character);
+        SpawnCharacter();
 
         _spawnDelay = null;
     }
@@ -63,7 +73,7 @@ public class CharacterSpawner : MonoBehaviour
     {
         if (_character != null)
         {
-            _character.Dead += SpawnCharacter;
+            _health.Died += SpawnCharacterDelayed;
         }
     }
 
@@ -71,7 +81,7 @@ public class CharacterSpawner : MonoBehaviour
     {
         if (_character != null)
         {
-            _character.Dead -= SpawnCharacter;
+            _health.Died -= SpawnCharacterDelayed;
         }
     }
 }

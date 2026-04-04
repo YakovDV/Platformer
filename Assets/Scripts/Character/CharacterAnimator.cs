@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(Character), typeof(CharacterMover))]
+[RequireComponent(typeof(Animator), typeof(Health), typeof(CharacterMover))]
 
 public class CharacterAnimator : MonoBehaviour
 {
@@ -11,24 +11,24 @@ public class CharacterAnimator : MonoBehaviour
     [SerializeField] private GroundSensor _groundSensor;
 
     private Animator _animator;
-    private Character _character;
+    private Health _health;
     private CharacterMover _characterMover;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _character = GetComponent<Character>();
+        _health = GetComponent<Health>();
         _characterMover = GetComponent<CharacterMover>();
     }
 
     private void OnEnable()
     {
-        _character.Dead += PlayDeathAnimation;
+        _health.Died += PlayDeathAnimation;
     }
 
     private void OnDisable()
     {
-        _character.Dead -= PlayDeathAnimation;
+        _health.Died -= PlayDeathAnimation;
     }
 
     private void Update()

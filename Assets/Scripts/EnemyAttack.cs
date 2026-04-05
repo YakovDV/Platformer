@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Health))]
-
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private Damager _damager;
@@ -13,23 +11,12 @@ public class EnemyAttack : MonoBehaviour
 
     private float _delay = 0.5f;
 
-    private Health _health;
     private Coroutine _attackCoroutine;
 
     public bool IsAttacking { get; private set; }
 
-    private void Awake()
-    {
-        _health = GetComponent<Health>();
-    }
-
     private void Update()
     {
-        if (_health.IsDead == true)
-        {
-            return;
-        }
-
         Transform target = _characterSensor.TargetPosition;
 
         if (target == null || IsAttacking)

@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     private const string Horizontal = nameof(Horizontal);
-    private const string Jump = nameof(Jump);
-    private const string Attack = nameof(Attack);
+    private const string JumpButtonName = "Jump";
+    private const string AttackButtonName = "Attack";
 
     public Vector2 InputDirection { get; private set; }
     public event Action JumpPressed;
@@ -15,12 +15,12 @@ public class PlayerInput : MonoBehaviour
     {
         float xDirection = Input.GetAxis(Horizontal);
 
-        if (Input.GetButtonDown(Jump))
+        if (Input.GetButtonDown(JumpButtonName))
         {
             JumpPressed?.Invoke();
         }
 
-        if (Input.GetButtonDown(Attack))
+        if (Input.GetButtonDown(AttackButtonName))
         {
             AttackPressed?.Invoke();
         }

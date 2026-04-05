@@ -17,11 +17,12 @@ public class EnemyCharacterSensor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        Character character = collider.gameObject.GetComponent<Character>();
-
-        if (character != null && TargetPosition == character.transform)
+        if (collider.TryGetComponent<Character>(out Character character))
         {
-            TargetPosition = null;
+            if (TargetPosition == character.transform)
+            {
+                TargetPosition = null;
+            }
         }
     }
 }

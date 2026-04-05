@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(EnemyPatrol), typeof(Rotator))]
 
@@ -8,9 +7,9 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _chaseSpeed;
     [SerializeField] private EnemyCharacterSensor _characterSensor;
+    [SerializeField] private EnemyAnimator _enemyAnimator;
 
     private Rigidbody2D _rigidbody;
-    private Health _health;
     private EnemyPatrol _enemyPatrol;
     private Rotator _horizontalTurn;
     private Vector2 _direction;
@@ -23,21 +22,16 @@ public class EnemyMover : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _enemyPatrol = GetComponent<EnemyPatrol>();
         _horizontalTurn = GetComponent<Rotator>();
-        _health = GetComponent<Health>();
     }
 
     private void FixedUpdate()
     {
-        if (_health != null && _health.IsDead == true)
-        {
-            return;
-        }
-
         Transform target = _characterSensor.TargetPosition;
 
         if (target != null)
         {
             Chase(target);
+            _enemyAnimator.SetSpeed(HorizontalSpeedNormalized());
             return;
         }
 
@@ -46,6 +40,7 @@ public class EnemyMover : MonoBehaviour
         if (_enemyPatrol.IsWaiting == true || target == null)
         {
             StopMoving();
+            _enemyAnimator.SetSpeed(0f);
             return;
         }
 
@@ -53,10 +48,11 @@ public class EnemyMover : MonoBehaviour
         {
             SetDirection(target);
             MoveToPoint(_speed);
+            _enemyAnimator.SetSpeed(HorizontalSpeedNormalized());
         }
     }
 
-    public float NormalizedHorizontalSpeed()
+    public float HorizontalSpeedNormalized()
     {
         return new Vector2(_rigidbody.velocity.x, 0f).magnitude / _speed;
     }

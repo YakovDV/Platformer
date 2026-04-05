@@ -19,16 +19,16 @@ public class Damager : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-            Health targetHealth = hit.GetComponentInParent<Health>();
+            if (hit.TryGetComponent<Health>(out Health health))
+            {
+                if (health == _ownHealth)
+                {
+                    continue;
+                }
 
-            if (targetHealth == null)
-                continue;
-
-            if (targetHealth == _ownHealth)
-                continue;
-
-            targetHealth.TakeDamage(_damage);
-            break;
+                health.TakeDamage(_damage);
+                break;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ public class CharacterMover : MonoBehaviour
     private Health _health;
     private Vector2 _horizontalVelocity;
 
-    public float NormalizedHorizontalSpeed { get; private set; }
+    public float HorizontalSpeedNormalized { get; private set; }
 
     private void Awake()
     {
@@ -52,12 +52,12 @@ public class CharacterMover : MonoBehaviour
         _horizontalVelocity = _playerInput.InputDirection * _speed;
         _rigidbody.velocity = new(_horizontalVelocity.x, _rigidbody.velocity.y);
 
-        NormalizedHorizontalSpeed = _horizontalVelocity.magnitude / _speed;
+        HorizontalSpeedNormalized = _horizontalVelocity.magnitude / _speed;
     }
 
     private void OnJumpPressed()
     {
-        if (_groundSensor.IsGrounded == false || _health.IsDead == true)
+        if (_groundSensor.IsGrounded() == false || _health.IsDead == true)
         {
             return;
         }

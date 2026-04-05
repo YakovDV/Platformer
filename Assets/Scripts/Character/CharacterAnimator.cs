@@ -33,13 +33,13 @@ public class CharacterAnimator : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetBool(IsJumping, !_groundSensor.IsGrounded);
+        _animator.SetBool(IsJumping, !_groundSensor.IsGrounded());
 
-        _animator.SetFloat(Speed, _characterMover.NormalizedHorizontalSpeed, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, _characterMover.HorizontalSpeedNormalized, 0.1f, Time.deltaTime);
     }
 
-    private void PlayDeathAnimation(bool isDead)
+    private void PlayDeathAnimation()
     {
-        _animator.SetBool(IsDying, isDead);
+        _animator.SetBool(IsDying, true);
     }
 }

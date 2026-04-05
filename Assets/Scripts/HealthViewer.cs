@@ -19,18 +19,18 @@ public class HealthViewer : MonoBehaviour
 
     private void OnDisable()
     {
-        _health.HealthChanged -= ShowHealth;
+        _health.ValueChanged -= ShowHealth;
     }
 
     public void SetHealth(Health health)
     {
         if (_health != null)
         {
-            _health.HealthChanged -= ShowHealth;
+            _health.ValueChanged -= ShowHealth;
         }
 
         _health = health;
-        _health.HealthChanged += ShowHealth;
+        _health.ValueChanged += ShowHealth;
 
         ShowHealth(_health.CurrentHealth);
     }

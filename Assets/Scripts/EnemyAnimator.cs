@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(EnemyMover), typeof(Health))]
+[RequireComponent(typeof(Animator))]
 
 public class EnemyAnimator : MonoBehaviour
 {
@@ -8,33 +8,19 @@ public class EnemyAnimator : MonoBehaviour
     private static readonly int IsDying = Animator.StringToHash("IsDying");
 
     private Animator _animator;
-    private EnemyMover _enemyMover;
-    private Health _health;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _health = GetComponent<Health>();
-        _enemyMover = GetComponent<EnemyMover>();
     }
 
-    private void OnEnable()
+    public void SetSpeed(float speed)
     {
-        _health.Died += PlayDeathAnimation;
+        _animator.SetFloat(Speed, speed, 0.1f, Time.deltaTime);
     }
 
-    private void OnDisable()
+    public void PlayDeathAnimation()
     {
-        _health.Died -= PlayDeathAnimation;
-    }
-
-    private void Update()
-    {
-        _animator.SetFloat(Speed, _enemyMover.NormalizedHorizontalSpeed(), 0.1f, Time.deltaTime);
-    }
-
-    private void PlayDeathAnimation(bool isDead)
-    {
-        _animator.SetBool(IsDying, isDead);
+        _animator.SetBool(IsDying, true);
     }
 }

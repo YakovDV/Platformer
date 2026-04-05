@@ -25,11 +25,8 @@ public class CharacterSpawner : MonoBehaviour
         UnsubscribeFromCharacter();
     }
 
-    private void SpawnCharacterDelayed(bool isSpawnNeeded)
+    private void SpawnCharacterDelayed()
     {
-        if (isSpawnNeeded == false)
-            return;
-
         if (_spawnDelay != null)
             StopCoroutine(_spawnDelay);
 
@@ -45,7 +42,11 @@ public class CharacterSpawner : MonoBehaviour
             collector.SetWallet(_wallet);
         }
 
-        _health = _character.GetComponent<Health>();
+        if (_character.TryGetComponent<Health>(out Health health))
+        {
+            _health = health;
+        }
+
         _healthViewer.SetHealth(_health);
 
         SubscribeToCharacter();

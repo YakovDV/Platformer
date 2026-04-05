@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wallet: {fileID: 0}
+  _health: {fileID: 3752276855911655107}
 --- !u!1 &2230115578469612619
 GameObject:
   m_ObjectHideFlags: 0

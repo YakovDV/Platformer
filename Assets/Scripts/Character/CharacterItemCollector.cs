@@ -2,9 +2,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 
-public class CharacterCoinCollector : MonoBehaviour
+public class CharacterItemCollector : MonoBehaviour
 {
     [SerializeField] private PlayerWallet _wallet;
+    [SerializeField] private Health _health;
     private Collider2D _collider;
 
     public void SetWallet(PlayerWallet wallet)
@@ -19,6 +20,11 @@ public class CharacterCoinCollector : MonoBehaviour
             _wallet?.AddCoin();
             coin.PlaySound();
             Destroy(coin.gameObject);
+        }
+        else if (collision.gameObject.TryGetComponent<HealPack>(out HealPack healpack))
+        {
+            _health?.TakeHeal(healpack.HealValue);
+            Destroy(healpack.gameObject);
         }
     }
 }

@@ -40,7 +40,7 @@ public class CharacterSpawner : MonoBehaviour
     {
         _character = Instantiate(_prefab);
 
-        if (_character.TryGetComponent<CharacterCoinCollector>(out CharacterCoinCollector collector))
+        if (_character.TryGetComponent<CharacterItemCollector>(out CharacterItemCollector collector))
         {
             collector.SetWallet(_wallet);
         }

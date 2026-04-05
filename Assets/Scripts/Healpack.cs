@@ -1,19 +1,8 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Collider2D))]
-
-public class Healpack : MonoBehaviour
+public class HealPack : MonoBehaviour
 {
-    [SerializeField] private int _heal = 10;
+    [SerializeField] private int _healValue = 10;
 
-    private Collider2D _collider;
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Health>(out Health health))
-        {
-            health.TakeHeal(_heal);
-            Destroy(this.gameObject);
-        }
-    }
+    public int HealValue => _healValue;
 }

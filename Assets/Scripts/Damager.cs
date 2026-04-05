@@ -4,7 +4,7 @@ using UnityEngine;
 public class Damager : MonoBehaviour
 {
     [SerializeField] private int _damage;
-    [SerializeField] private Vector2 _attackSize = new(0.4f, 0.4f);
+    [SerializeField] private Vector2 _attackSize = new(0.5f, 0.4f);
 
     private Health _ownHealth;
 

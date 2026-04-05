@@ -6,7 +6,6 @@ public class CharacterItemCollector : MonoBehaviour
 {
     [SerializeField] private PlayerWallet _wallet;
     [SerializeField] private Health _health;
-    private Collider2D _collider;
 
     public void SetWallet(PlayerWallet wallet)
     {
@@ -17,7 +16,7 @@ public class CharacterItemCollector : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Coin>(out Coin coin))
         {
-            _wallet?.AddCoin();
+            _wallet.AddCoin();
             coin.PlaySound();
             Destroy(coin.gameObject);
         }

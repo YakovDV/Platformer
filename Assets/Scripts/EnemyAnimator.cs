@@ -26,6 +26,13 @@ public class EnemyAnimator : MonoBehaviour
         _enemyDeath.Died += OnDied;
     }
 
+    private void OnDisable()
+    {
+        _enemyAttack.AttackStarted -= OnAttackStarted;
+        _enemyMover.SpeedChanged -= OnSpeedChaged;
+        _enemyDeath.Died -= OnDied;
+    }
+
     private void OnAttackStarted()
     {
         _animator.SetTrigger(Attacking);

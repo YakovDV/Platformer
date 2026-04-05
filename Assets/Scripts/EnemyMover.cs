@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(EnemyPatrol), typeof(Rotator))]
@@ -17,6 +18,8 @@ public class EnemyMover : MonoBehaviour
 
     private float _cahseDistance = 2f;
 
+    public event Action<float> SpeedChanged;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -31,7 +34,7 @@ public class EnemyMover : MonoBehaviour
         if (target != null)
         {
             Chase(target);
-            _enemyAnimator.SetSpeed(HorizontalSpeedNormalized());
+            SpeedChanged?.Invoke(HorizontalSpeedNormalized());
             return;
         }
 
@@ -40,7 +43,7 @@ public class EnemyMover : MonoBehaviour
         if (_enemyPatrol.IsWaiting == true || target == null)
         {
             StopMoving();
-            _enemyAnimator.SetSpeed(0f);
+            SpeedChanged?.Invoke(0f);
             return;
         }
 
@@ -48,7 +51,7 @@ public class EnemyMover : MonoBehaviour
         {
             SetDirection(target);
             MoveToPoint(_speed);
-            _enemyAnimator.SetSpeed(HorizontalSpeedNormalized());
+            SpeedChanged?.Invoke(HorizontalSpeedNormalized());
         }
     }
 

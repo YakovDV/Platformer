@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 846288660125992505}
   - component: {fileID: 5053989187160835361}
   - component: {fileID: 4048070049176182142}
-  - component: {fileID: 4853407837406990436}
   - component: {fileID: 3752276855911655107}
   - component: {fileID: 4849332672386201123}
   m_Layer: 0
@@ -258,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundSensor: {fileID: 7681982023000524554}
+  _characterAttack: {fileID: 4048070049176182142}
 --- !u!114 &4048070049176182142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,20 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 0.5
-  _attackAnimation: {fileID: 4853407837406990436}
+  _attackAnimation: {fileID: 0}
   _damager: {fileID: 3668835481633681306}
---- !u!114 &4853407837406990436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927701312919420352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112ab5019683af94fbb9c2ae7dadbdfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3752276855911655107
 MonoBehaviour:
   m_ObjectHideFlags: 0

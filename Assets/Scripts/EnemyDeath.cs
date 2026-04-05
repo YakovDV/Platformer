@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Health), typeof(Rigidbody2D), typeof(EnemyMover))]
@@ -12,6 +13,8 @@ public class EnemyDeath : MonoBehaviour
     private EnemyPatrol _enemyPatrol;
     private EnemyMover _enemyMover;
     private EnemyAttack _enemyAttack;
+
+    public event Action<bool> Died;
 
     private void Awake()
     {
@@ -34,7 +37,7 @@ public class EnemyDeath : MonoBehaviour
 
     private void OnDied()
     {
-        _enemyAnimator.PlayDeathAnimation();
+        Died?.Invoke(true);
 
         _enemyPatrol.enabled = false;
         _enemyMover.enabled = false;

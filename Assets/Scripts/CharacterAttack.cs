@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
@@ -7,11 +7,12 @@ using UnityEngine;
 public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private float _delay = 0.5f;
-    [SerializeField] private AttackAnimation _attackAnimation;
     [SerializeField] private Damager _damager;
 
     private PlayerInput _playerInput;
     private Coroutine _attackCoroutine;
+
+    public event Action AttackStarted;
 
     private bool _isAttacking;
 
@@ -48,7 +49,7 @@ public class CharacterAttack : MonoBehaviour
     private IEnumerator Attack()
     {
         _isAttacking = true;
-        _attackAnimation.PlayAttackAnimation();
+        AttackStarted?.Invoke();
         _damager.DamageDeal();
 
         yield return new WaitForSeconds(_delay);

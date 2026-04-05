@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 9136520354179946562}
   - component: {fileID: 3102146817511658139}
   - component: {fileID: 4220263134454805776}
-  - component: {fileID: 2506941285758040798}
   - component: {fileID: 5145044491394000940}
   m_Layer: 9
   m_Name: Enemy
@@ -259,6 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98feaa7d713188b4fbff33a789a1916e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyAttack: {fileID: 4220263134454805776}
+  _enemyMover: {fileID: 3102643326201484330}
+  _enemyDeath: {fileID: 5145044491394000940}
 --- !u!114 &9136520354179946562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,21 +300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damager: {fileID: 3864694972956564927}
   _characterSensor: {fileID: 76159010243044314}
-  _attackAnimation: {fileID: 2506941285758040798}
   _attackDistance: 2
   _delayBetweenAttacks: 1
---- !u!114 &2506941285758040798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61186810136872529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112ab5019683af94fbb9c2ae7dadbdfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5145044491394000940
 MonoBehaviour:
   m_ObjectHideFlags: 0

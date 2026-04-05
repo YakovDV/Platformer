@@ -10,6 +10,7 @@ public class EnemyPatrol : MonoBehaviour
     private int _currentPointIndex = 0;
 
     public bool IsWaiting { get; private set; }
+
     public Transform CurrentPoint
     {
         get

@@ -435,6 +435,39 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c11e5197a1c7b54c9116fd09043b290, type: 3}
+--- !u!114 &258231743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5145044491394000940, guid: 6bf7886848806774bb3466e83908c335, type: 3}
+  m_PrefabInstance: {fileID: 6875727238273696039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7342a8084a8a0440b28e657a8cc13f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &258231745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4220263134454805776, guid: 6bf7886848806774bb3466e83908c335, type: 3}
+  m_PrefabInstance: {fileID: 6875727238273696039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7cb79da34b2ad488f625b11af007e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &258231749 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3102643326201484330, guid: 6bf7886848806774bb3466e83908c335, type: 3}
+  m_PrefabInstance: {fileID: 6875727238273696039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e2dee3c8c1cc14c8c97a49dab1d379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &260140820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4582985021707282594, guid: 3c11e5197a1c7b54c9116fd09043b290, type: 3}
@@ -10597,9 +10630,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1570179276392998636, guid: 6bf7886848806774bb3466e83908c335, type: 3}
+      propertyPath: _enemyDeath
+      value: 
+      objectReference: {fileID: 258231743}
+    - target: {fileID: 1570179276392998636, guid: 6bf7886848806774bb3466e83908c335, type: 3}
+      propertyPath: _enemyMover
+      value: 
+      objectReference: {fileID: 258231749}
+    - target: {fileID: 1570179276392998636, guid: 6bf7886848806774bb3466e83908c335, type: 3}
+      propertyPath: _enemyAttack
+      value: 
+      objectReference: {fileID: 258231745}
     - target: {fileID: 3102146817511658139, guid: 6bf7886848806774bb3466e83908c335, type: 3}
       propertyPath: _maxValue
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220263134454805776, guid: 6bf7886848806774bb3466e83908c335, type: 3}
+      propertyPath: _attackAnimation
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4886291688720316646, guid: 6bf7886848806774bb3466e83908c335, type: 3}
       propertyPath: _points.Array.data[0]

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,13 +6,14 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private Damager _damager;
     [SerializeField] private EnemyCharacterSensor _characterSensor;
-    [SerializeField] private AttackAnimation _attackAnimation;
     [SerializeField] private float _attackDistance = 1f;
     [SerializeField] private float _delayBetweenAttacks = 1f;
 
     private float _delay = 0.5f;
 
     private Coroutine _attackCoroutine;
+
+    public event Action AttackStarted;
 
     public bool IsAttacking { get; private set; }
 
@@ -34,7 +36,7 @@ public class EnemyAttack : MonoBehaviour
     private IEnumerator Attack()
     {
         IsAttacking = true;
-        _attackAnimation.PlayAttackAnimation();
+        AttackStarted?.Invoke();
 
         yield return new WaitForSeconds(_delay);
 

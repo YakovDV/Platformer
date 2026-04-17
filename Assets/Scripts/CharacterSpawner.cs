@@ -7,7 +7,9 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private Character _prefab;
     [SerializeField] private PlayerWallet _wallet;
     [SerializeField] private HealthViewer _healthViewer;
+    [SerializeField] private HealthBar _healthBar;
     [SerializeField] private WaitForSeconds _delay = new(2f);
+    [SerializeField] private DamageHealButtons _damageHealButtons;
 
     private Character _character;
     private Health _health;
@@ -48,6 +50,8 @@ public class CharacterSpawner : MonoBehaviour
         }
 
         _healthViewer.SetHealth(_health);
+        _healthBar.SetCharacter(_character);
+        _damageHealButtons.SetTaget(_health);
 
         SubscribeToCharacter();
 

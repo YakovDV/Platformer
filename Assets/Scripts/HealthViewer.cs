@@ -4,6 +4,8 @@ using UnityEngine;
 public class HealthViewer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private string _textBeforeValue = "HP: ";
+    [SerializeField] private string _valueSeparator = "/";
 
     private Health _health;
 
@@ -42,6 +44,6 @@ public class HealthViewer : MonoBehaviour
             return;
         }
 
-        _text.text = health.ToString();
+        _text.text = _textBeforeValue + health.ToString() + _valueSeparator + _health.MaxValue;
     }
 }

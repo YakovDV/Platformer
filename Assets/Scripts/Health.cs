@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
     public event Action Died;
     public event Action<int> ValueChanged;
 
+    public int MaxValue => _maxValue;
+
     public int CurrentHealth { get; private set; }
 
     public bool IsDead { get; private set; }

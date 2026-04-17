@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
@@ -54,19 +51,6 @@ public class HealthBar : MonoBehaviour
     private void OnDisable()
     {
         _health.ValueChanged -= ShowHealth;
-    }
-
-    public void SetHealth(Health health)
-    {
-        if (_health != null)
-        {
-            _health.ValueChanged -= ShowHealth;
-        }
-
-        _health = health;
-        _health.ValueChanged += ShowHealth;
-
-        ShowHealth(_health.CurrentHealth);
     }
 
     public void SetCharacter(Character character)

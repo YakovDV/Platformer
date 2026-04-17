@@ -7,7 +7,6 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Health _health;
 
-    private float _valueScaler = 100f;
     private Slider _slider;
 
     private void Awake()
@@ -22,7 +21,7 @@ public class HealthBar : MonoBehaviour
             return;
         }
 
-        _slider.maxValue = _health.MaxValue / _valueScaler;
+        _slider.maxValue = _health.MaxValue;
         _slider.minValue = 0f;
 
         _health.ValueChanged += ShowHealth;
@@ -37,13 +36,11 @@ public class HealthBar : MonoBehaviour
 
     private void ShowHealth(int health)
     {
-        float currentHealth = health / (float)_valueScaler;
-
         if (_health == null)
         {
             return;
         }
 
-        _slider.value = currentHealth;
+        _slider.value = (float)health;
     }
 }

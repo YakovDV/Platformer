@@ -8,6 +8,8 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private PlayerWallet _wallet;
     [SerializeField] private HealthViewer _healthViewer;
     [SerializeField] private WaitForSeconds _delay = new(2f);
+    [SerializeField] private HealthBarSmooth _healthBarSmooth;
+    [SerializeField] private HealthBarMover _healthBarMover;
 
     private Character _character;
     private Health _health;
@@ -48,6 +50,16 @@ public class CharacterSpawner : MonoBehaviour
         }
 
         _healthViewer.SetHealth(_health);
+
+        if (_healthBarSmooth != null)
+        {
+            _healthBarSmooth.SetHealth(_health);
+        }
+
+        if (_healthBarMover != null)
+        {
+            _healthBarMover.SetTarget(_character.gameObject);
+        }
 
         SubscribeToCharacter();
 

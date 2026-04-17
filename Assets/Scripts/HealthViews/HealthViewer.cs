@@ -4,10 +4,9 @@ using UnityEngine;
 public class HealthViewer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private Health _health;
     [SerializeField] private string _textBeforeValue = "HP: ";
     [SerializeField] private string _valueSeparator = "/";
-
-    private Health _health;
 
     private void Start()
     {
@@ -17,6 +16,7 @@ public class HealthViewer : MonoBehaviour
         }
 
         ShowHealth(_health.CurrentHealth);
+        _health.ValueChanged += ShowHealth;
     }
 
     private void OnDisable()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
 
-public class CharacterAttack : MonoBehaviour
+public class CharacterAttacker : MonoBehaviour
 {
     [SerializeField] private float _delay = 0.5f;
     [SerializeField] private Damager _damager;

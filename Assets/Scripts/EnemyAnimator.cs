@@ -8,7 +8,7 @@ public class EnemyAnimator : MonoBehaviour
     private static readonly int IsDying = Animator.StringToHash("IsDying");
     private static readonly int Attacking = Animator.StringToHash("Attacking");
 
-    [SerializeField] private EnemyAttack _enemyAttack;
+    [SerializeField] private EnemyAttacker _enemyAttack;
     [SerializeField] private EnemyMover _enemyMover;
     [SerializeField] private EnemyDeath _enemyDeath;
 

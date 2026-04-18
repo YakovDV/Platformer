@@ -3,7 +3,6 @@ using UnityEngine;
 public class HealthBarMover : MonoBehaviour
 {
     [SerializeField] private GameObject _trackingTarget;
-    [SerializeField] private HealthBarSmooth _healthBarSmooth;
     [SerializeField] private Vector3 _offset = new(0f, 2f, 0f);
 
     private void Update()

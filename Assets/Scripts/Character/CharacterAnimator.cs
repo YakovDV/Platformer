@@ -10,7 +10,7 @@ public class CharacterAnimator : MonoBehaviour
     private static readonly int Attacking = Animator.StringToHash("Attacking");
 
     [SerializeField] private GroundSensor _groundSensor;
-    [SerializeField] private CharacterAttack _characterAttack;
+    [SerializeField] private CharacterAttacker _characterAttack;
 
     private Animator _animator;
     private Health _health;

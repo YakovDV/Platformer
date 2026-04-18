@@ -12,7 +12,7 @@ public class EnemyDeath : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private EnemyPatrol _enemyPatrol;
     private EnemyMover _enemyMover;
-    private EnemyAttack _enemyAttack;
+    private EnemyAttacker _enemyAttack;
 
     public event Action<bool> Died;
 
@@ -22,7 +22,7 @@ public class EnemyDeath : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _enemyPatrol = GetComponent<EnemyPatrol>();
         _enemyMover = GetComponent<EnemyMover>();
-        _enemyAttack = GetComponent<EnemyAttack>();
+        _enemyAttack = GetComponent<EnemyAttacker>();
     }
 
     private void OnEnable()

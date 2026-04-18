@@ -10,6 +10,8 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private WaitForSeconds _delay = new(2f);
     [SerializeField] private HealthBarSmooth _healthBarSmooth;
     [SerializeField] private HealthBarMover _healthBarMover;
+    [SerializeField] private HealthBarMover _vampirismBarMover;
+    [SerializeField] private VampirismBar _vampirismBar;
 
     private Character _character;
     private Health _health;
@@ -59,6 +61,19 @@ public class CharacterSpawner : MonoBehaviour
         if (_healthBarMover != null)
         {
             _healthBarMover.SetTarget(_character.gameObject);
+        }
+
+        if (_character.TryGetComponent<VampirismAbility>(out VampirismAbility vampirismAbility))
+        {
+            if (_vampirismBar != null)
+            {
+                _vampirismBar.SetAbility(vampirismAbility);
+            }
+
+            if (_vampirismBarMover != null)
+            {
+                _vampirismBarMover.SetTarget(_character.gameObject);
+            }
         }
 
         SubscribeToCharacter();
